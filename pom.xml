@@ -21,7 +21,7 @@
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>DANS Data Station Parent POM</name>
     <description>
         Parent POM for DANS Data Station modules
@@ -94,9 +94,10 @@
         <jgit.version>6.6.1.202309021850-r</jgit.version>
         <tika.version>1.28.3</tika.version>
         <ocfl-java-core.version>1.4.4</ocfl-java-core.version>
+        <apache-jena-libs.version>4.10.0</apache-jena-libs.version>
 
         <!-- Apache Commons -->
-        <commons-io.version>2.7</commons-io.version>
+        <commons-io.version>2.15.0</commons-io.version>
         <commons-codec.version>1.14</commons-codec.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-configuration.version>1.10</commons-configuration.version>
@@ -216,6 +217,13 @@
                 <artifactId>ocfl-java-core</artifactId>
                 <version>${ocfl-java-core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.jena</groupId>
+                <artifactId>apache-jena-libs</artifactId>
+                <version>${apache-jena-libs.version}</version>
+                <type>pom</type>
+            </dependency>
+
 
 
             <!-- Apache Commons -->
