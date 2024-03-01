@@ -66,14 +66,14 @@
 
         <!-- Library versions -->
         <!-- DropWizard managed BEGIN -->
-        <dropwizard.version>3.0.4</dropwizard.version>
+        <dropwizard.version>3.0.5</dropwizard.version>
 
         <!--
         N.B. the following versions must be kept the same as the versions imported by DropWizard. These variables are used
         to import related libraries that are *not* imported by DropWizard. The variable names in dropwizard-dependencies.pom
         are the same, but are not visible here, so they cannot be used directly.
         -->
-        <httpclient5.version>5.2.3</httpclient5.version>
+        <httpclient5.version>5.2.4</httpclient5.version>
         <!-- DropWizard managed END -->
 
         <!-- DANS libs -->
