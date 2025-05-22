@@ -90,7 +90,7 @@
         <!-- Formats -->
         <bagit.version>5.4.0</bagit.version>
         <zip4j.version>2.11.5</zip4j.version>
-        <jgit.version>6.6.1.202309021850-r</jgit.version>
+        <jgit.version>7.2.1.202505142326-r</jgit.version>
         <tika.version>2.9.1</tika.version>
         <ocfl-java.version>2.0.0</ocfl-java.version>
         <apache-jena-libs.version>4.10.0</apache-jena-libs.version>
