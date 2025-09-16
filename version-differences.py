@@ -38,6 +38,7 @@ def check_overrides(pom_path, dep_versions):
     root = tree.getroot()
     parent_version_elem = root.find("m:parent/m:version", NS)
     parent_version_text = parent_version_elem.text.strip() if parent_version_elem is not None and parent_version_elem.text else ""
+    # align module name beyond parent version with -SNAPSHOT
     print(f'{parent_version_text:<15} {pom_path.partition("modules/")[2]}')
     # Check for overridden properties
     props = root.find('m:properties', NS)
