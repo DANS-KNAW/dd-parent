@@ -64,9 +64,8 @@ def show_versions(override_version, parent_version):
         try:
             if parse_version(parent_version) < parse_version(override_version):
                 marker = "!!!!" # parent version is behind
-        except Exception as e:
-            marker = "????" # not able to compare invalid version(s)
-            pass
+        except Exception:
+            marker = "????" # not able to compare version
     return f'({override_version}) parent: ({parent_version}) {marker}'
 
 def find_poms(parent_dir):
@@ -74,8 +73,6 @@ def find_poms(parent_dir):
     for root, dirs, files in os.walk(parent_dir):
         if 'target' in dirs:
             dirs.remove('target')
-        dirs.sort()
-        files.sort()
         if 'pom.xml' in files:
             poms.append(os.path.join(root, 'pom.xml'))
     return poms
