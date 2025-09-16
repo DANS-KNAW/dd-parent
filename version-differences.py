@@ -36,44 +36,56 @@ def extract_dep_versions(pom_path):
 def check_overrides(pom_path, dep_versions):
     tree = ET.parse(pom_path)
     root = tree.getroot()
+    parent_version_elem = root.find("m:parent/m:version", NS)
+    parent_version_text = parent_version_elem.text.strip() if parent_version_elem is not None and parent_version_elem.text else ""
+    print(f'{parent_version_text:<15} {pom_path.partition("modules/")[2]}')
     # Check for overridden properties
     props = root.find('m:properties', NS)
     for name, parent_version in dep_versions:
         prop_tag = f'{name}.version'
         for prop in props or []:
-            if prop.tag.endswith(prop_tag):
-                print(f'         Overrides property: {prop_tag} {show_versions(prop.text.strip(), parent_version)}')
+            overridden_version = prop.text.strip()
+            if prop.tag.endswith(prop_tag) and overridden_version != parent_version:
+                print(f'         Overrides property: {prop_tag} {show_versions(overridden_version, parent_version)}')
     # Check for overridden dependency versions
     for dep, parent_version in dep_versions:
         for dep_elem in root.findall('.//m:dependency', NS):
             art = dep_elem.find('m:artifactId', NS)
             ver = dep_elem.find('m:version', NS)
-            if art is not None and art.text == dep and ver is not None and ver.text[0].isdigit():
-                print(f'         Overrides dependency version: {dep} {show_versions(ver.text.strip(), parent_version)}')
+            if art is not None and art.text == dep and ver is not None:
+                overridden_version = ver.text.strip()
+                if  overridden_version[0].isdigit() and overridden_version != parent_version:
+                    print(f'         Overrides version: {dep} {show_versions(overridden_version, parent_version)}')
+
 
 def show_versions(override_version, parent_version):
     marker = ""
     if not override_version.startswith("$"):
         try:
             if parse_version(parent_version) < parse_version(override_version):
-                marker = " !!!!" # parent version is behind
+                marker = "!!!!" # parent version is behind
         except Exception as e:
-            print (f'Error comparing versions: {override_version} and parent {parent_version}: {e} !!!')
+            marker = "????" # not able to compare invalid version(s)
             pass
     return f'({override_version}) parent: ({parent_version}) {marker}'
+
+def find_poms(parent_dir):
+    poms = []
+    for root, dirs, files in os.walk(parent_dir):
+        if 'target' in dirs:
+            dirs.remove('target')
+        dirs.sort()
+        files.sort()
+        if 'pom.xml' in files:
+            poms.append(os.path.join(root, 'pom.xml'))
+    return poms
 
 
 def main():
     dep_versions = extract_dep_versions(PARENT_POM)
-    for dir_name in os.listdir(PARENT_DIR):
-        dir_path = os.path.join(PARENT_DIR, dir_name)
-        if dir_path == os.getcwd():
-            continue # skip self
-        pom = os.path.join(dir_path, 'pom.xml')
-        if not os.path.isfile(pom):
-            continue
-        print(f'{pom.partition("modules/")[2]}')
-        check_overrides(pom, dep_versions)
+    for pom in sorted(find_poms(PARENT_DIR)):
+        if os.path.abspath(pom) != os.path.abspath(PARENT_POM):
+            check_overrides(pom, dep_versions)
 
 if __name__ == '__main__':
     main()
