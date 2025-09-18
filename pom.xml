@@ -66,21 +66,26 @@
 
         <!-- Library versions -->
         <dropwizard.version>3.0.5</dropwizard.version>
+        <dropwizard-testing.version>3.0.5</dropwizard-testing.version>
 
         <!-- DANS libs -->
         <dans-java-utils.version>2.3.0</dans-java-utils.version>
+        <dans-bagit-lib.version>1.2.0</dans-bagit-lib.version>
         <dans-validation-lib.version>1.1.0</dans-validation-lib.version>
         <dans-converter-lib.version>0.2.0</dans-converter-lib.version>
         <dans-dataverse-client-lib.version>1.4.0</dans-dataverse-client-lib.version>
-        <dans-layer-store-lib.version>0.8.0</dans-layer-store-lib.version>
-        <dans-ocfl-java-extensions-lib.version>0.7.0</dans-ocfl-java-extensions-lib.version>
+        <dans-layer-store-lib.version>0.12.0</dans-layer-store-lib.version>
+        <dans-ocfl-java-extensions-lib.version>0.11.0</dans-ocfl-java-extensions-lib.version>
         <dans-schema-lib.version>1.0.0</dans-schema-lib.version>
+        <dd-dans-sword2-examples.version>1.0.4</dd-dans-sword2-examples.version>
 
         <!-- DANS APIs -->
         <dd-vault-catalog-api.version>0.9.0</dd-vault-catalog-api.version>
         <dd-validate-dans-bag-api.version>1.0.0</dd-validate-dans-bag-api.version>
-        <dd-data-vault-api.version>0.4.0</dd-data-vault-api.version>
+        <dd-data-vault-api.version>0.6.0</dd-data-vault-api.version>
         <dd-gmh-api.version>0.1.1</dd-gmh-api.version>
+        <dd-confirm-archiving-api.version>0.1.0</dd-confirm-archiving-api.version>
+        <dd-dataverse-ingest-api.version>0.3.0</dd-dataverse-ingest-api.version>
 
         <!-- Database -->
         <postgresql.version>42.7.2</postgresql.version>
@@ -99,6 +104,9 @@
         <commons-io.version>2.19.0</commons-io.version>
         <commons-codec.version>1.16.1</commons-codec.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-exec.version>1.4.0</commons-exec.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-csv.version>1.10.0</commons-csv.version>
         <commons-daemon.version>1.3.4</commons-daemon.version>
@@ -111,12 +119,15 @@
         <!-- We cannot go to the latest version, until we go to jakarta -->
         <javax.xml.jaxb-api.version>2.3.1</javax.xml.jaxb-api.version>
         <jaxb-runtime.version>2.3.1</jaxb-runtime.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb-impl.version>2.3.3</jaxb-impl.version>
         <jersey-media-jaxb.version>2.35</jersey-media-jaxb.version>
 
         <!-- Misc utilities -->
         <quartz.version>2.3.2</quartz.version>
         <velocity-engine-core.version>2.3</velocity-engine-core.version>
         <json-path.version>2.9.0</json-path.version>
+        <jersey-media-json-jackson.version>2.40</jersey-media-json-jackson.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <jbcrypt.version>0.4</jbcrypt.version>
         <solr-solrj.version>9.5.0</solr-solrj.version>
@@ -148,6 +159,12 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-testing</artifactId>
+                <version>${dropwizard-testing.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>${jsr305.version}</version>
@@ -157,6 +174,11 @@
                 <groupId>nl.knaw.dans</groupId>
                 <artifactId>dans-java-utils</artifactId>
                 <version>${dans-java-utils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dans-bagit-lib</artifactId>
+                <version>${dans-bagit-lib.version}</version>
             </dependency>
             <dependency>
                 <groupId>nl.knaw.dans</groupId>
@@ -182,6 +204,16 @@
                 <groupId>nl.knaw.dans</groupId>
                 <artifactId>dans-ocfl-java-extensions-lib</artifactId>
                 <version>${dans-ocfl-java-extensions-lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-dataverse-ingest-api</artifactId>
+                <version>${dd-dataverse-ingest-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-dans-sword2-examples</artifactId>
+                <version>${dd-dans-sword2-examples.version}</version>
             </dependency>
 
 
@@ -263,6 +295,11 @@
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
