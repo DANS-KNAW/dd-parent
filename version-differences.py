@@ -22,52 +22,38 @@ PARENT_POM = 'pom.xml'
 PARENT_DIR = os.path.dirname(os.getcwd())
 NS = {'m': 'http://maven.apache.org/POM/4.0.0'}
 
-def extract_dep_versions(pom_path):
+def extract_versions(pom_path):
     tree = ET.parse(pom_path)
     root = tree.getroot()
     props = root.find('m:properties', NS)
-    dep_versions = []
+    dep_versions = {}
     for prop in props or []:
         if prop.tag.endswith('.version'):
             name = prop.tag.split('}', 1)[-1].replace('.version', '')
-            dep_versions.append((name, prop.text.strip()))
+            dep_versions[name] = prop.text.strip()
+    for dep_elem in root.findall('.//m:dependency', NS):
+        art = dep_elem.find('m:artifactId', NS)
+        ver = dep_elem.find('m:version', NS)
+        if art is not None and ver is not None and not ver.text.startswith('${'):
+            dep_versions[art.text] = ver.text
     return dep_versions
 
-def check_overrides(pom_path, dep_versions):
+def check_overrides(pom_path, parent_versions):
     tree = ET.parse(pom_path)
     root = tree.getroot()
     parent_version_elem = root.find("m:parent/m:version", NS)
     parent_version_text = parent_version_elem.text.strip() if parent_version_elem is not None and parent_version_elem.text else ""
+    if not parent_version_text:
+        return # TODO might need to report these differently
     # align module name beyond parent version with -SNAPSHOT
     print(f'{parent_version_text:<15} {pom_path.partition("modules/")[2]}')
-    # Check for overridden properties
-    props = root.find('m:properties', NS)
-    for name, parent_version in dep_versions:
-        prop_tag = f'{name}.version'
-        for prop in props or []:
-            overridden_version = prop.text.strip()
-            if prop.tag.endswith(prop_tag) and overridden_version != parent_version:
-                print(f'         Overrides property: {prop_tag} {show_versions(overridden_version, parent_version)}')
-    # Check for overridden dependency versions
-    for dep, parent_version in dep_versions:
-        for dep_elem in root.findall('.//m:dependency', NS):
-            art = dep_elem.find('m:artifactId', NS)
-            ver = dep_elem.find('m:version', NS)
-            if art is not None and art.text == dep and ver is not None:
-                overridden_version = ver.text.strip()
-                if  overridden_version[0].isdigit() and overridden_version != parent_version:
-                    print(f'         Overrides version: {dep} {show_versions(overridden_version, parent_version)}')
+    module_versions = extract_versions(pom_path)
+    for name, version in module_versions.items():
+        parent_version = parent_versions.get(name, "N/A")
+        if parent_version != "N/A" and parent_version == version:
+            parent_version = 'idem'
+        print(f'                          {name}: {version} parent: {parent_version}')
 
-
-def show_versions(override_version, parent_version):
-    marker = ""
-    if not override_version.startswith("$"):
-        try:
-            if parse_version(parent_version) < parse_version(override_version):
-                marker = "!!!!" # parent version is behind
-        except Exception:
-            marker = "????" # not able to compare version
-    return f'({override_version}) parent: ({parent_version}) {marker}'
 
 def find_poms(parent_dir):
     poms = []
@@ -79,11 +65,35 @@ def find_poms(parent_dir):
     return poms
 
 
+def check_parent_versions_used(pom_path):
+    tree = ET.parse(pom_path)
+    root = tree.getroot()
+    props = root.find('m:properties', NS)
+    version_props = set()
+    for prop in props or []:
+        if prop.tag.endswith('.version'):
+            name = prop.tag.split('}', 1)[-1].replace('.version', '')
+            version_props.add(name)
+    deps = set()
+    for dep_elem in root.findall('.//m:dependency', NS):
+        art = dep_elem.find('m:artifactId', NS)
+        ver = dep_elem.find('m:version', NS)
+        if art is not None and ver is not None and ver.text and ver.text.startswith('${'):
+            dep_name = ver.text.strip()[2:-1].replace('.version', '')
+            deps.add(dep_name)
+    unused = version_props - deps
+    if unused:
+        print("Unused version properties in parent POM (making them mandatory in child POM's):")
+        for name in sorted(unused):
+            print(f"  {name}.version")
+
+
 def main():
-    dep_versions = extract_dep_versions(PARENT_POM)
+    parent_versions = extract_versions(PARENT_POM)
     for pom in sorted(find_poms(PARENT_DIR)):
         if os.path.abspath(pom) != os.path.abspath(PARENT_POM):
-            check_overrides(pom, dep_versions)
+            check_overrides(pom, parent_versions)
+    check_parent_versions_used(PARENT_POM)
 
 if __name__ == '__main__':
     main()
