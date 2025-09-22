@@ -83,7 +83,7 @@ def check_parent_versions_used(pom_path):
             deps.add(dep_name)
     unused = version_props - deps
     if unused:
-        print("Unused version properties in parent POM (making them mandatory in child POM's):")
+        print("Version properties not used in parent POM (making them mandatory in child POM's):")
         for name in sorted(unused):
             print(f"  {name}.version")
 

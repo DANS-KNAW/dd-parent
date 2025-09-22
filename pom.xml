@@ -137,6 +137,11 @@
         <joda-time.version>2.12.7</joda-time.version>
         <picocli.version>4.7.6</picocli.version>
         <javax.activation.version>1.1.1</javax.activation.version>
+        <apiguardian-api.version>1.1.2</apiguardian-api.version>
+        <memoryfilesystem.version>2.6.1</memoryfilesystem.version>
+        <activation.version>1.1.1</activation.version>
+        <jtar.version>2.3</jtar.version>
+        <mockito-inline.version>5.1.1</mockito-inline.version>
 
         <!-- Code generation -->
         <okhttp.version>4.12.0</okhttp.version>
@@ -418,7 +423,33 @@
                 <artifactId>activation</artifactId>
                 <version>${javax.activation.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apiguardian</groupId>
+                <artifactId>apiguardian-api</artifactId>
+                <version>${apiguardian-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.marschall</groupId>
+                <artifactId>memoryfilesystem</artifactId>
+                <version>${memoryfilesystem.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-inline</artifactId>
+                <version>${mockito-inline.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kamranzafar</groupId>
+                <artifactId>jtar</artifactId>
+                <version>${jtar}</version>
+            </dependency>
 
             <!-- Open API -->
             <dependency>
