@@ -95,7 +95,7 @@
         <!-- Formats -->
         <bagit.version>5.4.0</bagit.version>
         <zip4j.version>2.11.5</zip4j.version>
-        <jgit.version>6.6.1.202309021850-r</jgit.version>
+        <jgit.version>7.2.1.202505142326-r</jgit.version>
         <tika.version>2.9.1</tika.version>
         <ocfl-java.version>2.0.0</ocfl-java.version>
         <apache-jena-libs.version>5.0.0</apache-jena-libs.version>
@@ -112,7 +112,7 @@
         <commons-daemon.version>1.3.4</commons-daemon.version>
         <commons-dbcp2.version>2.11.0</commons-dbcp2.version>
         <commons-compress.version>1.26.2</commons-compress.version>
-        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <commons-fileupload.version>1.6.0</commons-fileupload.version>
         <commons-configuration2.version>2.11.0</commons-configuration2.version>
 
         <!-- XML -->
@@ -128,7 +128,7 @@
         <velocity-engine-core.version>2.3</velocity-engine-core.version>
         <json-path.version>2.9.0</json-path.version>
         <jersey-media-json-jackson.version>2.40</jersey-media-json-jackson.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-beanutils.version>1.11.0</commons-beanutils.version>
         <jbcrypt.version>0.4</jbcrypt.version>
         <solr-solrj.version>9.5.0</solr-solrj.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
@@ -139,7 +139,6 @@
         <javax.activation.version>1.1.1</javax.activation.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <memoryfilesystem.version>2.6.1</memoryfilesystem.version>
-        <activation.version>1.1.1</activation.version>
         <jtar.version>2.3</jtar.version>
         <mockito-inline.version>5.1.1</mockito-inline.version>
 
@@ -441,14 +440,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>${activation.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.kamranzafar</groupId>
                 <artifactId>jtar</artifactId>
-                <version>${jtar}</version>
+                <version>${jtar.version}</version>
             </dependency>
 
             <!-- Open API -->
