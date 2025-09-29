@@ -21,6 +21,7 @@ from packaging.version import parse as parse_version
 PARENT_POM = 'pom.xml'
 PARENT_DIR = os.path.dirname(os.getcwd())
 NS = {'m': 'http://maven.apache.org/POM/4.0.0'}
+third_party = set()
 
 def extract_versions(pom_path):
     tree = ET.parse(pom_path)
@@ -34,8 +35,12 @@ def extract_versions(pom_path):
     for dep_elem in root.findall('.//m:dependency', NS):
         art = dep_elem.find('m:artifactId', NS)
         ver = dep_elem.find('m:version', NS)
+        grp = dep_elem.find('m:groupId', NS)
         if art is not None and ver is not None and not ver.text.startswith('${'):
             dep_versions[art.text] = ver.text
+        if art is not None and grp is not None:
+            if ver is not None and not ver.text.startswith('$'):
+                third_party.add(f'{grp.text}:{art.text}:{ver.text}')
     return dep_versions
 
 def check_overrides(pom_path, parent_versions):
@@ -86,6 +91,10 @@ def check_parent_versions_used(pom_path):
         print("Version properties not used in parent POM (making them mandatory in child POM's):")
         for name in sorted(unused):
             print(f"  {name}.version")
+    if third_party:
+        print("\nNo property for third party dependencies):")
+        for dep in sorted(third_party):
+            print(f'  {dep}')
 
 
 def main():
