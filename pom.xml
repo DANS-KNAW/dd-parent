@@ -96,7 +96,7 @@
         <bagit.version>5.4.0</bagit.version><!-- not yet in https://mvnrepository.com/artifact/nl.knaw.dans/bagit -->
         <zip4j.version>2.11.5</zip4j.version>
         <jgit.version>7.3.0.202506031305-r</jgit.version>
-        <tika.version>2.9.4</tika.version>
+        <tika.version>3.2.2</tika.version>
         <ocfl-java.version>2.2.2</ocfl-java.version>
         <apache-jena-libs.version>5.5.0</apache-jena-libs.version>
 
