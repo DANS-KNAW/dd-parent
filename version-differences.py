@@ -44,7 +44,11 @@ def extract_versions(pom_path):
     return dep_versions
 
 def check_overrides(pom_path, parent_versions):
-    tree = ET.parse(pom_path)
+    try:
+        tree = ET.parse(pom_path)
+    except ET.ParseError as e:
+        print(f'Error parsing {pom_path}: {e}')
+        return
     root = tree.getroot()
     parent_version_elem = root.find("m:parent/m:version", NS)
     parent_version_text = parent_version_elem.text.strip() if parent_version_elem is not None and parent_version_elem.text else ""
