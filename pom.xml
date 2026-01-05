@@ -21,7 +21,7 @@
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>1.10.1-SNAPSHOT</version>
+    <version>1.11.1-SNAPSHOT</version>
     <name>DANS Data Station Parent POM</name>
     <description>
         Parent POM for DANS Data Station modules
@@ -61,7 +61,7 @@
         <license-maven-plugin.version>4.6</license-maven-plugin.version>
         <rpm-maven-plugin.version>2.3.0</rpm-maven-plugin.version>
         <dans-nexus-maven-plugin.version>0.4.0</dans-nexus-maven-plugin.version>
-        <dans-build-resources-maven-plugin.version>0.7.0</dans-build-resources-maven-plugin.version>
+        <dans-build-resources-maven-plugin.version>0.8.0</dans-build-resources-maven-plugin.version>
 
 
         <!-- Library versions -->
@@ -69,23 +69,26 @@
         <dropwizard-testing.version>3.0.16</dropwizard-testing.version>
 
         <!-- DANS libs -->
-        <dans-java-utils.version>2.3.0</dans-java-utils.version>
-        <dans-bagit-lib.version>1.2.0</dans-bagit-lib.version>
+        <dans-java-utils.version>2.5.1</dans-java-utils.version>
+        <dans-bagit-lib.version>1.2.1</dans-bagit-lib.version>
         <dans-validation-lib.version>1.1.0</dans-validation-lib.version>
         <dans-converter-lib.version>0.2.0</dans-converter-lib.version>
-        <dans-dataverse-client-lib.version>1.4.2</dans-dataverse-client-lib.version>
+        <dans-dataverse-client-lib.version>1.5.0</dans-dataverse-client-lib.version>
         <dans-layer-store-lib.version>0.12.0</dans-layer-store-lib.version>
         <dans-ocfl-java-extensions-lib.version>0.11.0</dans-ocfl-java-extensions-lib.version>
         <dans-schema-lib.version>1.0.0</dans-schema-lib.version>
-        <dd-dans-sword2-examples.version>1.0.4</dd-dans-sword2-examples.version>
+        <dd-dans-sword2-examples.version>1.1.0</dd-dans-sword2-examples.version>
 
         <!-- DANS APIs -->
-        <dd-vault-catalog-api.version>0.9.0</dd-vault-catalog-api.version>
+        <dd-vault-catalog-api.version>0.10.0</dd-vault-catalog-api.version>
         <dd-validate-dans-bag-api.version>1.0.0</dd-validate-dans-bag-api.version>
-        <dd-data-vault-api.version>0.7.0</dd-data-vault-api.version>
+        <dd-data-vault-api.version>0.8.0</dd-data-vault-api.version>
         <dd-gmh-api.version>0.1.1</dd-gmh-api.version>
         <dd-confirm-archiving-api.version>0.1.0</dd-confirm-archiving-api.version>
-        <dd-dataverse-ingest-api.version>0.3.0</dd-dataverse-ingest-api.version>
+        <dd-dataverse-ingest-api.version>0.4.0</dd-dataverse-ingest-api.version>
+        <dd-validate-bagpack-api.version>0.2.0</dd-validate-bagpack-api.version>
+        <dd-vault-metadata-api.version>1.0.0</dd-vault-metadata-api.version>
+        <dd-virus-scan-api.version>0.1.0</dd-virus-scan-api.version>
 
         <!-- Database -->
         <postgresql.version>42.7.8</postgresql.version>
@@ -99,6 +102,7 @@
         <tika.version>3.2.2</tika.version>
         <ocfl-java.version>2.2.2</ocfl-java.version>
         <apache-jena-libs.version>5.5.0</apache-jena-libs.version>
+        <jsonld-java.version>0.13.5</jsonld-java.version>
 
         <!-- Apache Commons -->
         <commons-io.version>2.20.0</commons-io.version>
@@ -126,7 +130,7 @@
         <!-- Misc utilities -->
         <quartz.version>2.5.0</quartz.version>
         <velocity-engine-core.version>2.4.1</velocity-engine-core.version>
-        <json-path.version>2.9.0</json-path.version>
+        <json-path.version>2.10.0</json-path.version>
         <jersey-media-json-jackson.version>2.47</jersey-media-json-jackson.version>
         <commons-beanutils.version>1.11.0</commons-beanutils.version>
         <jbcrypt.version>0.4</jbcrypt.version>
@@ -229,6 +233,27 @@
                 <artifactId>dans-layer-store-lib</artifactId>
                 <version>${dans-layer-store-lib.version}</version>
             </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-validate-bagpack-api</artifactId>
+                <version>${dd-validate-bagpack-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-vault-metadata-api</artifactId>
+                <version>${dd-vault-metadata-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-virus-scan-api</artifactId>
+                <version>${dd-virus-scan-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-vault-catalog-api</artifactId>
+                <version>${dd-vault-catalog-api.version}</version>
+            </dependency>
+
 
             <!-- Database -->
             <dependency>
@@ -285,6 +310,12 @@
                 <version>${apache-jena-libs.version}</version>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>com.github.jsonld-java</groupId>
+                <artifactId>jsonld-java</artifactId>
+                <version>${jsonld-java.version}</version>
+            </dependency>
+
 
 
 
