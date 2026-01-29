@@ -21,7 +21,7 @@
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>1.11.1-SNAPSHOT</version>
+    <version>1.11.2-SNAPSHOT</version>
     <name>DANS Data Station Parent POM</name>
     <description>
         Parent POM for DANS Data Station modules
@@ -73,7 +73,7 @@
         <dans-bagit-lib.version>1.2.1</dans-bagit-lib.version>
         <dans-validation-lib.version>1.1.0</dans-validation-lib.version>
         <dans-converter-lib.version>0.2.0</dans-converter-lib.version>
-        <dans-dataverse-client-lib.version>1.5.0</dans-dataverse-client-lib.version>
+        <dans-dataverse-client-lib.version>1.5.1</dans-dataverse-client-lib.version>
         <dans-layer-store-lib.version>0.12.0</dans-layer-store-lib.version>
         <dans-ocfl-java-extensions-lib.version>0.11.0</dans-ocfl-java-extensions-lib.version>
         <dans-schema-lib.version>1.0.0</dans-schema-lib.version>
