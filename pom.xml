@@ -39,7 +39,7 @@
         <rpm-scriptlets-dir>${project.build.directory}/rpm-scriptlets</rpm-scriptlets-dir>
         <rpm-replace-configuration>true</rpm-replace-configuration>
         <rpm-release />
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <main-class /> <!-- To be filled in by child project -->
 
         <!-- Plugin versions -->
@@ -53,7 +53,7 @@
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <openapi-generator-maven-plugin.version>7.15.0</openapi-generator-maven-plugin.version>
         <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version><!-- Generates javax.xml classes. When upgrading we need to go wholesale to jakarta.xml.bind-api -->
 
@@ -562,8 +562,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <release>${java.version}</release>
                         <!-- By default project.build.sourceEncoding is not used by the compiler plug-in, and
                              it defaults to ASCII, which messed up some unit tests that specifically used
                              files with Greek letters in it. -->
@@ -887,6 +886,7 @@
                         <excludes>
                             <exclude>.github/**</exclude>
                             <exclude>LICENSE</exclude>
+                            <exclude>/NOTICE</exclude>
                             <exclude>**/README</exclude>
                             <exclude>**/*.graphml</exclude>
                             <exclude>etc/</exclude>
@@ -899,6 +899,8 @@
                             <exclude>docs/</exclude>
                             <exclude>**/pom.xml.versionsBackup</exclude>
                             <exclude>.venv*/</exclude>
+                            <exclude>**/.keepme</exclude>
+                            <exclude>**/*.bak</exclude>
                         </excludes>
                     </configuration>
                     <executions>
@@ -946,6 +948,13 @@
                     <groupId>org.projectlombok</groupId>
                     <artifactId>lombok-maven-plugin</artifactId>
                     <version>${lombok-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
 
                 <plugin>
