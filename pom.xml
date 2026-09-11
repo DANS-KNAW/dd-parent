@@ -32,8 +32,6 @@
     <packaging>pom</packaging>
     <name>DANS Data Station Parent POM</name>
     <description>Parent POM for DANS Data Station modules</description>
-    <!-- inceptionYear and scm intentionally override the parent's defaults: they reflect
-         dd-parent's own project history/repository, not the generic core-systems-parent's. -->
     <inceptionYear>2022</inceptionYear>
     <scm>
         <connection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</connection>
@@ -45,9 +43,11 @@
         <dans-provider-name>dans.knaw.nl</dans-provider-name>
         <rpm-scriptlets-dir>${project.build.directory}/rpm-scriptlets</rpm-scriptlets-dir>
         <rpm-replace-configuration>true</rpm-replace-configuration>
+
+        <!-- To be filled in by child project -->
         <rpm-release/>
         <main-class/>
-        <!-- To be filled in by child project -->
+
 
         <!-- Plugin versions -->
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
