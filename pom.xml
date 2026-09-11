@@ -848,7 +848,6 @@
                     <executions>
                         <execution>
                             <goals>
-                                <goal>get-license-header-template</goal>
                                 <goal>generate-rpm-scriptlets</goal>
                             </goals>
                         </execution>
