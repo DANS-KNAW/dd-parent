@@ -16,31 +16,36 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>nl.datastations</groupId>
+        <artifactId>dans-core-systems-parent</artifactId>
+        <version>0.1.1-SNAPSHOT</version>
+    </parent>
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>1.12.1-SNAPSHOT</version>
-    <name>DANS Data Station Parent POM</name>
-    <description>
-        Parent POM for DANS Data Station modules
-    </description>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>DANS Data Station Parent POM</name>
+    <description>Parent POM for DANS Data Station modules</description>
     <inceptionYear>2022</inceptionYear>
     <scm>
+        <connection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</connection>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <properties>
         <dans-provider-name>dans.knaw.nl</dans-provider-name>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <rpm-scriptlets-dir>${project.build.directory}/rpm-scriptlets</rpm-scriptlets-dir>
         <rpm-replace-configuration>true</rpm-replace-configuration>
-        <rpm-release />
-        <java.version>21</java.version>
-        <main-class /> <!-- To be filled in by child project -->
+        <rpm-release/>
+        <main-class/>
+        <!-- To be filled in by child project -->
 
         <!-- Plugin versions -->
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
@@ -55,14 +60,14 @@
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <openapi-generator-maven-plugin.version>7.15.0</openapi-generator-maven-plugin.version>
-        <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version><!-- Generates javax.xml classes. When upgrading we need to go wholesale to jakarta.xml.bind-api -->
+        <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version>
+        <!-- Generates javax.xml classes. When upgrading, we need to go wholesale to jakarta.xml.bind-api -->
 
         <exec-maven-plugin.version>3.5.1</exec-maven-plugin.version>
         <license-maven-plugin.version>4.6</license-maven-plugin.version>
         <rpm-maven-plugin.version>2.3.0</rpm-maven-plugin.version>
         <dans-nexus-maven-plugin.version>1.0.0</dans-nexus-maven-plugin.version>
-        <dans-build-resources-maven-plugin.version>0.8.0</dans-build-resources-maven-plugin.version>
-
+        <dans-build-resources-maven-plugin.version>0.9.0</dans-build-resources-maven-plugin.version>
 
         <!-- Library versions -->
         <dropwizard.version>3.0.16</dropwizard.version>
@@ -96,7 +101,8 @@
         <hsqldb.version>2.7.4</hsqldb.version>
 
         <!-- Formats -->
-        <bagit.version>5.4.0</bagit.version><!-- not yet in https://mvnrepository.com/artifact/nl.knaw.dans/bagit -->
+        <bagit.version>5.4.0</bagit.version>
+        <!-- not yet in https://mvnrepository.com/artifact/nl.knaw.dans/bagit -->
         <zip4j.version>2.11.5</zip4j.version>
         <jgit.version>7.3.0.202506031305-r</jgit.version>
         <tika.version>3.2.2</tika.version>
@@ -254,7 +260,6 @@
                 <version>${dd-vault-catalog-api.version}</version>
             </dependency>
 
-
             <!-- Database -->
             <dependency>
                 <groupId>org.hsqldb</groupId>
@@ -271,7 +276,6 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector-java.version}</version>
             </dependency>
-
 
             <!-- Formats -->
             <dependency>
@@ -315,9 +319,6 @@
                 <artifactId>jsonld-java</artifactId>
                 <version>${jsonld-java.version}</version>
             </dependency>
-
-
-
 
             <!-- Apache Commons -->
             <dependency>
@@ -386,12 +387,12 @@
                 <artifactId>jaxb-api</artifactId>
                 <version>${javax.xml.jaxb-api.version}</version>
             </dependency>
-<!-- Change javax.xml.bind to jakarta.xml.bind-api when we go to jakarta -->
-<!--            <dependency>-->
-<!--                <groupId>jakarta.xml.bind</groupId>-->
-<!--                <artifactId>jakarta.xml.bind-api</artifactId>-->
-<!--                <version>${jakarta.xml.bind-api.version}</version>-->
-<!--            </dependency>-->
+            <!-- Change javax.xml.bind to jakarta.xml.bind-api when we go to jakarta -->
+            <!--            <dependency>-->
+            <!--                <groupId>jakarta.xml.bind</groupId>-->
+            <!--                <artifactId>jakarta.xml.bind-api</artifactId>-->
+            <!--                <version>${jakarta.xml.bind-api.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
@@ -536,24 +537,6 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>nl.knaw.dans</groupId>
-                <artifactId>dans-build-resources-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
                 <!-- maven-compiler-plugin -->
@@ -563,7 +546,7 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
-                        <!-- By default project.build.sourceEncoding is not used by the compiler plug-in, and
+                        <!-- By default, project.build.sourceEncoding is not used by the compiler plug-in, and
                              it defaults to ASCII, which messed up some unit tests that specifically used
                              files with Greek letters in it. -->
                         <encoding>${project.build.sourceEncoding}</encoding>
@@ -596,18 +579,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <includePom>true</includePom>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!-- maven-jar-plugin -->
                 <plugin>
@@ -678,13 +661,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>rpm-maven-plugin</artifactId>
                     <version>${rpm-maven-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.codehaus.plexus</groupId>
-                            <artifactId>plexus-archiver</artifactId>
-                            <version>${plexus-archiver.version}</version>
-                        </dependency>
-                    </dependencies>
                     <configuration>
                         <group>Applications/Archiving</group>
                         <release>${rpm-release}</release>
@@ -829,6 +805,13 @@
                             <fileEncoding>UTF-8</fileEncoding>
                         </verifyScriptlet>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-archiver</artifactId>
+                            <version>${plexus-archiver.version}</version>
+                        </dependency>
+                    </dependencies>
                     <executions>
                         <execution>
                             <id>attach-rpm</id>
@@ -851,10 +834,10 @@
                     <executions>
                         <execution>
                             <id>make-assembly</id>
-                            <phase>package</phase>
                             <goals>
                                 <goal>single</goal>
                             </goals>
+                            <phase>package</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -871,50 +854,8 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- license-maven-plugin -->
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>${license-maven-plugin.version}</version>
-                    <configuration>
-                        <!-- Retrieved by dans-build-resources-maven-plugin -->
-                        <header>${project.build.directory}/apache2.txt</header>
-                        <properties>
-                            <owner>DANS - Data Archiving and Networked Services</owner>
-                            <email>info@dans.knaw.nl</email>
-                        </properties>
-                        <excludes>
-                            <exclude>.github/**</exclude>
-                            <exclude>LICENSE</exclude>
-                            <exclude>/NOTICE</exclude>
-                            <exclude>**/README</exclude>
-                            <exclude>**/*.graphml</exclude>
-                            <exclude>etc/</exclude>
-                            <exclude>data/</exclude>
-                            <exclude>data-*/</exclude>
-                            <exclude>src/test/resources/**</exclude>
-                            <exclude>src/main/resources/**</exclude>
-                            <exclude>src/main/assembly/dist/**</exclude>
-                            <exclude>*.pyc</exclude>
-                            <exclude>docs/</exclude>
-                            <exclude>**/pom.xml.versionsBackup</exclude>
-                            <exclude>.venv*/</exclude>
-                            <exclude>**/.keepme</exclude>
-                            <exclude>**/*.bak</exclude>
-                        </excludes>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>process-sources</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
 
-
-                <!-- dans-nexus-maven-plugin -->
+                <!-- dans-nexus-maven-plugin - for releasing RPMs -->
                 <plugin>
                     <groupId>nl.knaw.dans</groupId>
                     <artifactId>dans-nexus-maven-plugin</artifactId>
@@ -970,10 +911,10 @@
                         </execution>
                         <execution>
                             <id>report</id>
-                            <phase>test</phase>
                             <goals>
                                 <goal>report</goal>
                             </goals>
+                            <phase>test</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -982,6 +923,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>jaxb2-maven-plugin</artifactId>
                     <version>${jaxb2-maven-plugin.version}</version>
+                    <configuration>
+                        <clearOutputDir>false</clearOutputDir>
+                        <noGeneratedHeaderComments>true</noGeneratedHeaderComments>
+                        <extension>true</extension>
+                    </configuration>
                     <executions>
                         <execution>
                             <goals>
@@ -989,11 +935,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <clearOutputDir>false</clearOutputDir>
-                        <noGeneratedHeaderComments>true</noGeneratedHeaderComments>
-                        <extension>true</extension>
-                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -1017,66 +958,24 @@
 
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dans-build-resources-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>dans-releases</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/releases/</url>
-        </repository>
-        <repository>
-            <id>dans-snapshots</id>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/snapshots/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>dans-releases</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/releases/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>dans-snapshots</id>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/snapshots/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <distributionManagement>
-        <!-- Credentials for server are defined in ~/.m2/settings.xml -->
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <!-- Final slash is important for Nexus ! -->
-            <url>https://maven.dans.knaw.nl/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <!-- Final slash is important for Nexus ! -->
-            <url>https://maven.dans.knaw.nl/releases/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
