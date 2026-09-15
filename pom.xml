@@ -75,6 +75,7 @@
         <dd-virus-scan-api.version>0.2.0</dd-virus-scan-api.version>
         <dd-lob-store.api.version>1.3.0</dd-lob-store.api.version>
         <dd-manage-deposit-api.version>1.0.1</dd-manage-deposit-api.version>
+        <dd-transfer-to-vault-api.version>0.1.1</dd-transfer-to-vault-api.version>
 
         <!-- Apache Commons -->
         <commons-lang.version>2.6</commons-lang.version>
@@ -135,6 +136,11 @@
                 <groupId>nl.knaw.dans</groupId>
                 <artifactId>dd-manage-deposit-api</artifactId>
                 <version>${dd-manage-deposit-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-transfer-to-vault-api</artifactId>
+                <version>${dd-transfer-to-vault-api.version}</version>
             </dependency>
 
             <!-- Database -->
