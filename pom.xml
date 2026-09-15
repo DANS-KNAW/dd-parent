@@ -64,17 +64,17 @@
         <dropwizard-testing.version>3.0.16</dropwizard-testing.version>
 
         <!-- DANS APIs -->
-        <dd-dans-sword2-examples.version>1.1.0</dd-dans-sword2-examples.version>
-        <dd-vault-catalog-api.version>0.10.0</dd-vault-catalog-api.version>
+        <dd-dans-sword2-examples.version>1.2.0</dd-dans-sword2-examples.version>
+        <dd-vault-catalog-api.version>1.2.0</dd-vault-catalog-api.version>
         <dd-validate-dans-bag-api.version>1.0.0</dd-validate-dans-bag-api.version>
-        <dd-data-vault-api.version>0.8.0</dd-data-vault-api.version>
+        <dd-data-vault-api.version>2.1.0</dd-data-vault-api.version>
         <dd-gmh-api.version>0.1.1</dd-gmh-api.version>
-        <dd-confirm-archiving-api.version>0.1.0</dd-confirm-archiving-api.version>
         <dd-dataverse-ingest-api.version>0.4.0</dd-dataverse-ingest-api.version>
         <dd-validate-bagpack-api.version>0.2.0</dd-validate-bagpack-api.version>
         <dd-vault-metadata-api.version>1.0.0</dd-vault-metadata-api.version>
-        <dd-virus-scan-api.version>0.1.0</dd-virus-scan-api.version>
-
+        <dd-virus-scan-api.version>0.2.0</dd-virus-scan-api.version>
+        <dd-lob-store.api.version>1.3.0</dd-lob-store.api.version>
+        <dd-manage-deposit-api.version>1.0.1</dd-manage-deposit-api.version>
 
         <!-- Apache Commons -->
         <commons-lang.version>2.6</commons-lang.version>
@@ -125,6 +125,16 @@
                 <groupId>nl.knaw.dans</groupId>
                 <artifactId>dd-vault-catalog-api</artifactId>
                 <version>${dd-vault-catalog-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-lob-store-api</artifactId>
+                <version>${dd-lob-store.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dd-manage-deposit-api</artifactId>
+                <version>${dd-manage-deposit-api.version}</version>
             </dependency>
 
             <!-- Database -->
