@@ -27,7 +27,7 @@
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <packaging>pom</packaging>
     <name>DANS Data Station Parent POM</name>
     <description>Parent POM for DANS Data Station modules</description>
@@ -35,7 +35,7 @@
     <scm>
         <connection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</connection>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v3.0.0</tag>
     </scm>
 
     <properties>
@@ -44,8 +44,8 @@
         <rpm-replace-configuration>true</rpm-replace-configuration>
 
         <!-- To be filled in by child project -->
-        <rpm-release/>
-        <main-class/>
+        <rpm-release />
+        <main-class />
 
         <!-- Plugin versions -->
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
