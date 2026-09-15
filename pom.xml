@@ -16,18 +16,19 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>nl.datastations</groupId>
         <artifactId>dans-core-systems-parent</artifactId>
-        <version>0.2.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>2.0.3-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DANS Data Station Parent POM</name>
     <description>Parent POM for DANS Data Station modules</description>
@@ -44,8 +45,8 @@
         <rpm-replace-configuration>true</rpm-replace-configuration>
 
         <!-- To be filled in by child project -->
-        <rpm-release />
-        <main-class />
+        <rpm-release/>
+        <main-class/>
 
 
         <!-- Plugin versions -->
@@ -74,36 +75,26 @@
         <dd-vault-metadata-api.version>1.0.0</dd-vault-metadata-api.version>
         <dd-virus-scan-api.version>0.1.0</dd-virus-scan-api.version>
 
-        <!-- Database -->
-        <!-- postgresql.version intentionally overrides the parent's default (42.7.12); pinned
-             lower deliberately, see plan.md -->
-        <postgresql.version>42.7.8</postgresql.version>
-        <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
-
-        <!-- Formats -->
-        <bagit.version>5.4.0</bagit.version>
-        <!-- not yet in https://mvnrepository.com/artifact/nl.knaw.dans/bagit -->
 
         <!-- Apache Commons -->
         <commons-lang.version>2.6</commons-lang.version>
         <commons-configuration.version>1.10</commons-configuration.version>
-        <!-- commons-configuration2.version intentionally overrides the parent's default
-             (2.15.0); pinned lower deliberately, see plan.md -->
-        <commons-configuration2.version>2.12.0</commons-configuration2.version>
-
-        <!-- XML -->
-        <!-- We cannot go to the latest version, until we go to jakarta -->
-
-        <!-- Misc utilities -->
-        <jersey-media-json-jackson.version>2.47</jersey-media-json-jackson.version>
-
-        <!-- plexus-archiver.version intentionally overrides the parent's default (4.8.0); pinned
-             lower deliberately, see plan.md -->
-        <plexus-archiver.version>3.7.0</plexus-archiver.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Temporary overrides for dans libs not yet published under nl.datastations -->
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dans-java-utils</artifactId>
+                <version>4.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>nl.knaw.dans</groupId>
+                <artifactId>dans-ocfl-java-extensions-lib</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+
             <!-- DANS APIs not managed by the parent -->
             <dependency>
                 <groupId>nl.knaw.dans</groupId>
@@ -143,18 +134,7 @@
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
             </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
-            </dependency>
 
-            <!-- Formats -->
-            <dependency>
-                <groupId>nl.knaw.dans</groupId>
-                <artifactId>bagit</artifactId>
-                <version>${bagit.version}</version>
-            </dependency>
 
             <!-- Apache Commons -->
             <dependency>
@@ -204,27 +184,6 @@
                                 <Implementation-Version>${project.version}</Implementation-Version>
                             </manifestEntries>
                         </archive>
-                    </configuration>
-                </plugin>
-                <!-- maven-javadoc-plugin: configuration diverges from the parent's (missing
-                     doclint/attach-javadocs execution, different footer). UNCONFIRMED whether
-                     this is a deliberate override or unintentional drift - needs follow-up
-                     discussion before deciding to keep or align with parent, see plan.md -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${maven-javadoc-plugin.version}</version>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                        <linksource>false</linksource>
-                        <failOnWarnings>true</failOnWarnings>
-                        <bottom><![CDATA[Copyright ${project.inceptionYear}, <a href="http://www.dans.knaw.nl">DANS<a>]]></bottom>
-                        <additionalJOptions>
-                            <additionalJOption>-J-Xmx1g</additionalJOption>
-                            <additionalJOption>-J-Djava.awt.headless=true</additionalJOption>
-                            <!-- Prevent javadoc from requiring a doc comment for every getter and setter -->
-                            <additionalJOption>-Xdoclint:-missing</additionalJOption>
-                        </additionalJOptions>
                     </configuration>
                 </plugin>
                 <!-- rpm-maven-plugin -->
@@ -325,7 +284,7 @@
                             <!--
                                 To prevent the following problem from occurring:
                                 https://github.com/DANS-KNAW/easy-dtap#problem-building-rpm
-                                Somehow this macro was not defined on some developers' systems and they had to work around it by
+                                Somehow this macro was not defined on some developers' systems, and they had to work around it by
                                 defining it in ~/.rpmmacros. This should no longer be necessary.
                             -->
                             <defineStatement>_tmppath %{_topdir}/BUILD</defineStatement>
@@ -502,6 +461,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <!-- Disable the inherited Javadocs generation; it is basically only useful for libraries -->
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
