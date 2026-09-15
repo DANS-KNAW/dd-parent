@@ -22,7 +22,7 @@
     <parent>
         <groupId>nl.datastations</groupId>
         <artifactId>dans-core-systems-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <groupId>nl.knaw.dans</groupId>
@@ -82,18 +82,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Temporary overrides for dans libs not yet published under nl.datastations -->
-            <dependency>
-                <groupId>nl.knaw.dans</groupId>
-                <artifactId>dans-java-utils</artifactId>
-                <version>4.1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>nl.knaw.dans</groupId>
-                <artifactId>dans-ocfl-java-extensions-lib</artifactId>
-                <version>3.0.0</version>
-            </dependency>
-
             <!-- DANS APIs not managed by the parent -->
             <dependency>
                 <groupId>nl.knaw.dans</groupId>
