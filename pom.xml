@@ -27,7 +27,7 @@
 
     <groupId>nl.knaw.dans</groupId>
     <artifactId>dd-parent</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DANS Data Station Parent POM</name>
     <description>Parent POM for DANS Data Station modules</description>
@@ -35,7 +35,7 @@
     <scm>
         <connection>scm:git:https://github.com/DANS-KNAW/dd-parent</connection>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dd-parent</developerConnection>
-        <tag>v3.0.2</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/DANS-KNAW/dd-parent</url>
     </scm>
 
