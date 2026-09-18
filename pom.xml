@@ -33,8 +33,8 @@
     <description>Parent POM for DANS Data Station modules</description>
     <inceptionYear>2022</inceptionYear>
     <scm>
-        <connection>scm:git:https://github.com/DANS-KNAW/${project.artifactId}</connection>
-        <developerConnection>scm:git:ssh://github.com/DANS-KNAW/${project.artifactId}</developerConnection>
+        <connection>scm:git:https://github.com/DANS-KNAW/dd-parent</connection>
+        <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dd-parent</developerConnection>
         <tag>HEAD</tag>
         <url>https://github.com/DANS-KNAW/${project.artifactId}</url>
     </scm>
