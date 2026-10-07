@@ -22,8 +22,7 @@
     <parent>
         <groupId>nl.datastations</groupId>
         <artifactId>dans-core-systems-parent</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
-        <relativePath>../dans-core-systems-parent</relativePath>
+        <version>2.0.0</version>
     </parent>
 
     <groupId>nl.knaw.dans</groupId>
