@@ -62,16 +62,16 @@
         <!-- DANS APIs -->
         <dd-dans-sword2-examples.version>1.2.0</dd-dans-sword2-examples.version>
         <dd-vault-catalog-api.version>1.2.0</dd-vault-catalog-api.version>
-        <dd-validate-dans-bag-api.version>1.0.1</dd-validate-dans-bag-api.version>
-        <dd-data-vault-api.version>2.1.0</dd-data-vault-api.version>
+        <dd-validate-dans-bag-api.version>1.0.2</dd-validate-dans-bag-api.version>
+        <dd-data-vault-api.version>2.1.1</dd-data-vault-api.version>
         <dd-gmh-api.version>0.1.1</dd-gmh-api.version>
-        <dd-dataverse-ingest-api.version>0.4.1</dd-dataverse-ingest-api.version>
-        <dd-validate-bagpack-api.version>0.2.0</dd-validate-bagpack-api.version>
-        <dd-vault-metadata-api.version>1.0.1</dd-vault-metadata-api.version>
-        <dd-virus-scan-api.version>0.2.1</dd-virus-scan-api.version>
-        <dd-lob-store-api.version>1.3.1</dd-lob-store-api.version>
-        <dd-manage-deposit-api.version>1.0.1</dd-manage-deposit-api.version>
-        <dd-transfer-to-vault-api.version>0.1.2</dd-transfer-to-vault-api.version>
+        <dd-dataverse-ingest-api.version>0.4.2</dd-dataverse-ingest-api.version>
+        <dd-validate-bagpack-api.version>0.2.1</dd-validate-bagpack-api.version>
+        <dd-vault-metadata-api.version>1.0.2</dd-vault-metadata-api.version>
+        <dd-virus-scan-api.version>0.2.2</dd-virus-scan-api.version>
+        <dd-lob-store-api.version>1.3.2</dd-lob-store-api.version>
+        <dd-manage-deposit-api.version>1.0.2</dd-manage-deposit-api.version>
+        <dd-transfer-to-vault-api.version>0.1.3</dd-transfer-to-vault-api.version>
     </properties>
 
     <dependencyManagement>
